@@ -1,7 +1,8 @@
 package beans;
 
 import model.User;
-import org.h2.util.IOUtils;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
 import service.UserService;
 
@@ -11,7 +12,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
+
+import utils.SaveLoadFiles;
 
 @RequestScoped
 @Named
@@ -24,13 +31,60 @@ public class UserBean {
 
     private UploadedFile file;
 
+    private StreamedContent filed;
+
     @Inject
     UserService userService;
 
     @PostConstruct
     public void init() {
         userList = userService.getAllUsers();
+        cleanData();
     }
+
+    //FUNTIONS
+    public void cleanData(){
+        name=null;
+        file=null;
+    }
+
+
+    public void upload() throws IOException {
+        if (file != null && name != null) {
+            User user = new User();
+            user.setName(name);
+            userService.saveUser(user);
+
+            SaveLoadFiles.saveFile(file,"lol.png");
+
+            FacesMessage message = new FacesMessage("Successful", file.getFileName()
+                    + " is uploaded.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            cleanData();
+        }
+    }
+    public StreamedContent donwload(String name){
+        filed = SaveLoadFiles.loadFile(name);
+        return filed;
+    }
+    public UserBean() {
+
+        filed = DefaultStreamedContent.builder()
+                .name("downloaded_boromir.jpg")
+                .contentType("image/jpg")
+                .stream(() -> {
+                    try {
+                        return new FileInputStream("lol.png");
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                })
+                .build();
+    }
+
+
+    //GETTERS SETTERS
 
     public User getUser() {
         return user;
@@ -48,6 +102,15 @@ public class UserBean {
         this.userList = userList;
     }
 
+
+    public StreamedContent getFiled() {
+        return filed;
+    }
+
+    public void setFiled(StreamedContent filed) {
+        this.filed = filed;
+    }
+
     public String getName() {
         return name;
     }
@@ -63,16 +126,4 @@ public class UserBean {
     public void setFile(UploadedFile file) {
         this.file = file;
     }
-
-    public void upload() {
-        if (file != null && name != null) {
-            User user = new User();
-            user.setName(name);
-            userService.saveUser(user);
-            FacesMessage message = new FacesMessage("Successful", file.getFileName()
-                    + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-        }
-    }
-
 }

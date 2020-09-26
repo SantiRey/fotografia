@@ -1,9 +1,6 @@
 package model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
@@ -16,6 +13,8 @@ public class User {
 
     private String password;
 
+    @Lob
+    @Column(length = 1000)
     private byte[] foto;
 
     public void setId(int id) {
