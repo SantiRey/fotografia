@@ -22,6 +22,10 @@ public class UserService {
         return users;
     }
 
+    public void saveUser(User user){
+        userDao.persist(user);
+    }
+
     public List<User> getUsers() {
         return users;
     }
