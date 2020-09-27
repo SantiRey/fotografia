@@ -29,4 +29,10 @@ public class UserDao {
         List<User> users=em.createQuery("SELECT a From User a",User.class).getResultList();
         return users;
     }
+
+    public User get(String name){
+        User users=em.createQuery("SELECT a From User a WHERE a.name =: name",User.class)
+                .setParameter("name",name).getSingleResult();
+        return users;
+    }
 }

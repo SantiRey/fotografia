@@ -26,6 +26,11 @@ public class UserService {
         userDao.persist(user);
     }
 
+    public User getSingleUser(String name){
+        user=userDao.get(name);
+        return user;
+    }
+
     public List<User> getUsers() {
         return users;
     }
