@@ -25,11 +25,8 @@ jobs:
       run: |
         cd target
         ls 
-    - uses: actions/download-artifact@v2
+    - name: Upload war
+      uses: actions/upload-artifact@v2
       with:
         name: Foto-Managment.war
         path: target
-    
-    - name: Display structure of downloaded files
-      run: ls -R
-      working-directory: target
