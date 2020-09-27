@@ -28,8 +28,12 @@ public class userBean {
             name="Toda via no tiene una foto asignada por favor contacte al vendedor";
         }else{
             user = userService.getSingleUser(name);
+            if(user==null){
+
+            }
         }
     }
+
     public StreamedContent donwload(String name){
         filed = SaveLoadFiles.loadFile(name);
         return filed;

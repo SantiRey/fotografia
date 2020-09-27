@@ -55,7 +55,7 @@ public class AdminBean {
             user.setName(name);
             userService.saveUser(user);
 
-            SaveLoadFiles.saveFile(file,"lol.png");
+            SaveLoadFiles.saveFile(file,name+".png");
 
             FacesMessage message = new FacesMessage("Successful", file.getFileName()
                     + " is uploaded.");

@@ -26,13 +26,17 @@ public class UserDao {
     }
 
     public List<User> getall(){
-        List<User> users=em.createQuery("SELECT a From User a",User.class).getResultList();
-        return users;
+        return em.createQuery("SELECT a From User a",User.class).getResultList();
+
     }
 
     public User get(String name){
-        User users=em.createQuery("SELECT a From User a WHERE a.name =: name",User.class)
-                .setParameter("name",name).getSingleResult();
-        return users;
+        try {
+            return em.createQuery("SELECT a From User a WHERE a.name =: name", User.class)
+                    .setParameter("name", name).getSingleResult();
+
+        } catch (Exception e){
+            return null;
+        }
     }
 }
