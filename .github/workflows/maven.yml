@@ -19,11 +19,6 @@ jobs:
         java-version: 11
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-      
-    - uses: actions/download-artifact@v2
-      with:
-        name: Build with Maven
-    
-    - name: Display structure of downloaded files
-      run: ls -R
+    - name: see
+      run: ls
     
