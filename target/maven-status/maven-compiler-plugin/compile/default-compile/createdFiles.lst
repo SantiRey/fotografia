@@ -1,5 +1,5 @@
-beans/UserBean.class
 utils/initialData.class
+beans/userBean.class
 model/User.class
 service/UserService.class
 dao/UserDao.class

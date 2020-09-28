@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Helados Web</title>
+</h:head>
+
+<h:body style="background-repeat:no-repeat;background-position: center; background-size:4000px; background-image:url('Background.png')">
+    <div style="position: center; width: 250px">
+        <h:form>
+
+            <h:panelGrid id="grid" columns="1" cellpadding="1" style="position: absolute; top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);">
+                     <span class="ui-float-label">
+                         <p:inputText id="float-inputName" value="#{indexBean.name}"/>
+                         <p:outputLabel for="@previous" value="Username"/>
+                    </span>
+                <span class="ui-float-label">
+                         <p:password id="Password" value="#{indexBean.password}" label="Password"/>
+                         <p:outputLabel for="@previous" value="Password"/>
+                    </span>
+                <div style="position: center">
+                    <p:commandButton value="LOGIN" ajax="false" action="#{indexBean.valitation}" icon="pi pi-check"
+                                     validateClient="true"
+                                     style="margin-right:10px"/>
+                </div>
+            </h:panelGrid>
+
+
+        </h:form>
+    </div>
+</h:body>
+</html>
