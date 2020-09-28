@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 public class UserDao {
@@ -30,13 +31,13 @@ public class UserDao {
 
     }
 
-    public User get(String name){
+    public Optional<User> get(String name){
         try {
-            return em.createQuery("SELECT a From User a WHERE a.name =: name", User.class)
-                    .setParameter("name", name).getSingleResult();
+            return Optional.of(em.createQuery("SELECT a From User a WHERE a.name =: name", User.class)
+                    .setParameter("name", name).getSingleResult());
 
         } catch (Exception e){
-            return null;
+            return Optional.empty();
         }
     }
 }

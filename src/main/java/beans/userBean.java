@@ -27,9 +27,8 @@ public class userBean {
         if(name.equals(null)){
             name="Toda via no tiene una foto asignada por favor contacte al vendedor";
         }else{
-            user = userService.getSingleUser(name);
-            if(user==null){
-
+            if(userService.getSingleUser(name).isPresent()){
+                user = userService.getSingleUser(name).get();
             }
         }
     }

@@ -12,7 +12,7 @@ import java.io.IOException;
 public class SaveLoadFiles {
 
     public static void saveFile(UploadedFile file, String name) throws IOException {
-        FileOutputStream pictureFileStream = new FileOutputStream(name);
+        FileOutputStream pictureFileStream = new FileOutputStream("images/"+name);
         pictureFileStream.write(file.getContent());
         pictureFileStream.close();
     }
@@ -22,7 +22,7 @@ public class SaveLoadFiles {
                 .contentType("image/jpg")
                 .stream(() -> {
                     try {
-                        return new FileInputStream(name + ".png");
+                        return new FileInputStream("images/"+name + ".png");
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }

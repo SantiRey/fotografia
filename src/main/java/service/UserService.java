@@ -6,6 +6,7 @@ import model.User;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Optional;
 
 
 public class UserService {
@@ -26,9 +27,15 @@ public class UserService {
         userDao.persist(user);
     }
 
-    public User getSingleUser(String name){
-        user=userDao.get(name);
-        return user;
+    public Optional<User> getSingleUser(String name){
+        if(userDao.get(name).isPresent()){
+            user=userDao.get(name).get();
+            return Optional.of(user);
+        }else{
+            return Optional.empty();
+        }
+
+
     }
 
     public List<User> getUsers() {

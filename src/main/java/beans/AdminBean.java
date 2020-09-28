@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import utils.SaveLoadFiles;
 
@@ -53,14 +54,20 @@ public class AdminBean {
         if (file != null && name != null) {
             User user = new User();
             user.setName(name);
-            userService.saveUser(user);
+            if(!userService.getSingleUser(name).isPresent()){
 
-            SaveLoadFiles.saveFile(file,name+".png");
+                userService.saveUser(user);
+                SaveLoadFiles.saveFile(file,name+".png");
+            }else{
 
-            FacesMessage message = new FacesMessage("Successful", file.getFileName()
-                    + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-            cleanData();
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Nombre Repetido", file.getFileName()
+                        + "El usuario ya existe por favor cambie el nombre");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                cleanData();
+            }
+
+
+
         }
     }
     public StreamedContent donwload(String name){
