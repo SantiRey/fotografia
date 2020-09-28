@@ -1,5 +1,8 @@
+beans/IndexBean.class
 utils/initialData.class
 beans/userBean.class
 model/User.class
 service/UserService.class
 dao/UserDao.class
+utils/SaveLoadFiles.class
+beans/AdminBean.class
