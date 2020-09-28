@@ -22,7 +22,7 @@ public class SaveLoadFiles {
                 .contentType("image/jpg")
                 .stream(() -> {
                     try {
-                        return new FileInputStream(name + ".png");
+                        return new FileInputStream(name + ".jpg");
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
