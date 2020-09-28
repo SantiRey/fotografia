@@ -16,6 +16,7 @@ public class SaveLoadFiles {
         pictureFileStream.write(file.getContent());
         pictureFileStream.close();
     }
+
     public static StreamedContent loadFile(String name){
         DefaultStreamedContent fileLoaded = DefaultStreamedContent.builder()
                 .name("yourFoto.jpg")
