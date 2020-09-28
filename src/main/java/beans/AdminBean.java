@@ -57,7 +57,7 @@ public class AdminBean {
             if(!userService.getSingleUser(name).isPresent()){
 
                 userService.saveUser(user);
-                SaveLoadFiles.saveFile(file,name+".png");
+                SaveLoadFiles.saveFile(file,name+".jpg");
             }else{
 
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Nombre Repetido", file.getFileName()
