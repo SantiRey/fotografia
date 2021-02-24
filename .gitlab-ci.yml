@@ -11,7 +11,7 @@ buildApp:
       - .m2/repository
       - target/
   script:
-    - 'mvn verify'
+    - 'mvn clean'
 
 deployApp:
   stage: deploy
