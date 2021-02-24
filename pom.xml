@@ -118,7 +118,7 @@
                 <version>2.2</version>
                 <configuration>
                     <url>http://${env.IP}:8080/manager/text</url>
-                    <server>TomcatServer</server>
+
                     <update>true</update>
                     <username>${env.USERD}</username>
                     <password>${env.PASS}</password>
