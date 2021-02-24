@@ -9,8 +9,19 @@ buildApp:
   cache:
     paths:
       - .m2/repository
+      - target/
   script:
     - 'mvn verify'
 
+deployApp:
+  stage: deploy
+  image: maven
+  cache:
+    paths:
+      - .m2/repository
+      - target/
+  script:
+    - 'echo $IP'
+    - 'mvn install tomcat7:deploy'
 
 

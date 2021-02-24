@@ -119,6 +119,9 @@
                 <configuration>
                     <url>http://$IP:8080/manager/text</url>
                     <server>TomcatServer</server>
+                    <update>true</update>
+                    <username>$USERD</username>
+                    <password>$PASS</password>
                     <path>/foto</path>
                 </configuration>
             </plugin>
