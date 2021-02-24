@@ -3,7 +3,7 @@ stage:
   - test
   - deploy
 
-build:
+buildApp:
   stage: build
   image: maven
   cache:
