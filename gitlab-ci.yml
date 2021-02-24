@@ -1,0 +1,16 @@
+stage:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  image: maven
+  cache:
+    paths:
+      - .m2/repository
+  script:
+    - 'mvn verify'
+
+
+
