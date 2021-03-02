@@ -3,12 +3,13 @@ stages:
   - test
   - deploy
 
+cache:
+  paths:
+    - .m2/repository
+
 buildApp:
   stage: build
   image: maven
-  cache:
-    paths:
-      - .m2/repository
   script:
     - 'mvn clean install'
 
