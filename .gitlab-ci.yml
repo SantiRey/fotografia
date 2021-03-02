@@ -22,7 +22,7 @@ deployApp:
     - 'export USERD=$USERD'
     - 'export PASSWORD=$PASS'
     - 'mvn install'
-    - 'ls && cd .. && ls'
+    - 'cd .. && ls'
     #- 'mvn install tomcat7:deploy'
 
 
