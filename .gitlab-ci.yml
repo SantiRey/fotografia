@@ -8,24 +8,21 @@ buildApp:
   image: maven
   cache:
     paths:
-      - .m2/
-      - target/
+      - root/.m2/
   script:
-    - 'mvn clean'
+    - 'mvn clean install'
 
 deployApp:
   stage: deploy
   image: maven
-  cache:
-    paths:
-      - .m2/
-      - target/
   script:
     - 'echo $IP'
     - 'echo $USERD'
     - 'export IP=$IP'
     - 'export USERD=$USERD'
     - 'export PASSWORD=$PASS'
-    - 'mvn install tomcat7:deploy'
+    - 'mvn install'
+    - 'ls && cd .. && ls'
+    #- 'mvn install tomcat7:deploy'
 
 
