@@ -8,7 +8,7 @@ buildApp:
   image: maven
   cache:
     paths:
-      - root/.m2/
+      - ./.m2/*
   script:
     - 'mvn clean install'
 
