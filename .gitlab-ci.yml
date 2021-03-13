@@ -25,6 +25,7 @@ deploy_review:
   environment:
     name: review/$CI_COMMIT_BRANCH
     url: http://$IP:9990/$CI_COMMIT_BRANCH/index.xhtml
+  when: manual
   only:
     - branches
   except:
