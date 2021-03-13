@@ -15,7 +15,7 @@ buildApp:
     - 'mvn clean '
     - 'echo $CI_COMMIT_BRANCH'
     - 'export BRANCH=$CI_COMMIT_BRANCH'
-    - 'echo BRANCH'
+    - 'echo $BRANCH'
 
 deploy_review:
   stage: deploy
