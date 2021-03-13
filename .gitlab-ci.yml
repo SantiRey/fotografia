@@ -12,7 +12,7 @@ buildApp:
   stage: build
   image: maven
   script:
-    - 'mvn clean install'
+    - 'mvn clean '
 
 deploy_review:
   stage: deploy
@@ -25,7 +25,7 @@ deploy_review:
     - 'export USERD=$USERD'
     - 'export PASSWORD=$PASS'
     - 'export BRANCH=$CI_COMMIT_BRANCH'
-    - ' mvn wildfly:undeploy wildfly:deploy'
+    - ' mvn install wildfly:deploy'
   environment:
     name: review/$CI_COMMIT_BRANCH
     url: http://$IP:9990/$CI_COMMIT_BRANCH.index.xhtml
@@ -45,7 +45,7 @@ deploy_prod:
     - 'export USERD=$USERD'
     - 'export PASSWORD=$PASS'
     - 'export BRANCH=$CI_COMMIT_BRANCH'
-    - ' mvn wildfly:undeploy wildfly:deploy'
+    - ' mvn install wildfly:deploy'
   environment:
     name: production
     url: http://$IP:9990/$CI_COMMIT_BRANCH.index.xhtml
