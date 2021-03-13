@@ -110,7 +110,7 @@
     </dependencies>
 
     <build>
-        <finalName>foto</finalName>
+        <finalName>fo</finalName>
         <plugins>
             <!--wildfly-->
             <plugin>
