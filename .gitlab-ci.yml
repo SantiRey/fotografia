@@ -8,36 +8,6 @@ cache:
   paths:
     - ./.m2/repository
 
-buildApp:
-  stage: build
-  image: maven
-  script:
-    - 'mvn clean '
-    - 'echo $CI_COMMIT_BRANCH'
-    - 'export BRANCH=$CI_COMMIT_BRANCH'
-    - 'echo $BRANCH'
-
-deploy_review:
-  stage: deploy
-  image: maven
-  script:
-    - echo "Deploy a review app"
-    - 'echo $IP'
-    - 'echo $USERD'
-    - 'echo $CI_COMMIT_BRANCH'
-    - 'export BRANCH=$CI_COMMIT_BRANCH'
-    - 'echo $BRANCH'
-    - 'export IP=$IP'
-    - 'export USERD=$USERD'
-    - 'export PASSWORD=$PASS'
-    - 'mvn install wildfly:deploy'
-  environment:
-    name: review/$CI_COMMIT_BRANCH
-    url: http://$IP:9990/$CI_COMMIT_BRANCH/index.xhtml
-  except:
-    - master
-
-
 deploy_prod:
   stage: deploy
   image: maven
@@ -57,16 +27,3 @@ deploy_prod:
   when: manual
   only:
     - master
-
-#deployApp:
-#  stage: deploy
-#  image: maven
-#  script:
-#    - 'echo $IP'
-#    - 'echo $USERD'
-#    - 'export IP=$IP'
-#    - 'export USERD=$USERD'
-#    - 'export PASSWORD=$PASS'
-#    - ' mvn wildfly:undeploy wildfly:deploy'
-
-
