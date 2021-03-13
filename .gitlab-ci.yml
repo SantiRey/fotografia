@@ -1,3 +1,4 @@
+
 stages:
   - build
   - test
@@ -11,19 +12,56 @@ buildApp:
   stage: build
   image: maven
   script:
-    - 'mvn clean'
+    - 'mvn clean install'
 
-deployApp:
+deploy_review:
   stage: deploy
   image: maven
   script:
+    - echo "Deploy a review app"
     - 'echo $IP'
     - 'echo $USERD'
     - 'export IP=$IP'
     - 'export USERD=$USERD'
     - 'export PASSWORD=$PASS'
-    #- 'mvn install'
-    #- 'cd .. && ls'
-    - 'mvn install wildfly:deploy'
+    - 'export BRANCH=$CI_COMMIT_BRANCH'
+    - ' mvn wildfly:undeploy wildfly:deploy'
+  environment:
+    name: review/$CI_COMMIT_BRANCH
+    url: http://$IP:9990/$CI_COMMIT_BRANCH.index.xhtml
+  only:
+    - branches
+  except:
+    - master
+
+deploy_prod:
+  stage: deploy
+  image: maven
+  script:
+    - echo "Deploy to production server"
+    - 'echo $IP'
+    - 'echo $USERD'
+    - 'export IP=$IP'
+    - 'export USERD=$USERD'
+    - 'export PASSWORD=$PASS'
+    - 'export BRANCH=$CI_COMMIT_BRANCH'
+    - ' mvn wildfly:undeploy wildfly:deploy'
+  environment:
+    name: production
+    url: http://$IP:9990/$CI_COMMIT_BRANCH.index.xhtml
+  when: manual
+  only:
+    - master
+
+#deployApp:
+#  stage: deploy
+#  image: maven
+#  script:
+#    - 'echo $IP'
+#    - 'echo $USERD'
+#    - 'export IP=$IP'
+#    - 'export USERD=$USERD'
+#    - 'export PASSWORD=$PASS'
+#    - ' mvn wildfly:undeploy wildfly:deploy'
 
 
