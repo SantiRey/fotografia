@@ -30,7 +30,6 @@ deploy_review:
     - 'export IP=$IP'
     - 'export USERD=$USERD'
     - 'export PASSWORD=$PASS'
-
     - 'mvn install wildfly:deploy'
   environment:
     name: review/$CI_COMMIT_BRANCH
