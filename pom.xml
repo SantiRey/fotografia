@@ -110,7 +110,7 @@
     </dependencies>
 
     <build>
-        <finalName>fo</finalName>
+        <finalName>${env.BRANCH}</finalName>
         <plugins>
             <!--wildfly-->
             <plugin>

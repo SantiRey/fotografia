@@ -13,6 +13,9 @@ buildApp:
   image: maven
   script:
     - 'mvn clean '
+    - 'echo $CI_COMMIT_BRANCH'
+    - 'export BRANCH=$CI_COMMIT_BRANCH'
+    - 'echo BRANCH'
 
 deploy_review:
   stage: deploy
@@ -22,10 +25,12 @@ deploy_review:
     - 'echo $IP'
     - 'echo $USERD'
     - 'echo $CI_COMMIT_BRANCH'
+    - 'export BRANCH=$CI_COMMIT_BRANCH'
+    - 'echo BRANCH'
     - 'export IP=$IP'
     - 'export USERD=$USERD'
     - 'export PASSWORD=$PASS'
-    - 'export BRANCH=$CI_COMMIT_BRANCH'
+
     - 'mvn install wildfly:deploy'
   environment:
     name: review/$CI_COMMIT_BRANCH
