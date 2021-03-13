@@ -15,17 +15,14 @@ deploy_review:
     - echo "Deploy a review app"
     - 'echo $IP'
     - 'echo $USERD'
-    - 'echo $CI_COMMIT_BRANCH'
-    - 'export BRANCH=$CI_COMMIT_BRANCH'
-    - 'echo $BRANCH'
     - 'export IP=$IP'
     - 'export USERD=$USERD'
     - 'export PASSWORD=$PASS'
+    - 'export BRANCH=$CI_COMMIT_BRANCH'
     - 'mvn install wildfly:deploy'
   environment:
     name: review/$CI_COMMIT_BRANCH
     url: http://$IP:9990/$CI_COMMIT_BRANCH/index.xhtml
-  when: manual
   only:
     - branches
   except:
@@ -39,7 +36,6 @@ deploy_prod:
     - echo "Deploy to production server"
     - 'echo $IP'
     - 'echo $USERD'
-    - 'echo $CI_COMMIT_BRANCH'
     - 'export IP=$IP'
     - 'export USERD=$USERD'
     - 'export PASSWORD=$PASS'
