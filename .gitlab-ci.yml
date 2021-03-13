@@ -22,8 +22,8 @@ deployApp:
     - 'export IP=$IP'
     - 'export USERD=$USERD'
     - 'export PASSWORD=$PASS'
-    - 'mvn install'
-    - 'cd .. && ls'
+    #- 'mvn install'
+    #- 'cd .. && ls'
     - 'mvn install wildfly:deploy'
 
 
