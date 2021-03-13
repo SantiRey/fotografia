@@ -8,6 +8,9 @@ cache:
   paths:
     - ./.m2/repository
 
+variables:
+  USERD: $USERD
+
 deploy_review:
   stage: deploy
   image: maven
@@ -16,7 +19,6 @@ deploy_review:
     - 'echo $IP'
     - 'echo $USERD'
     - 'export IP=$IP'
-    - 'export USERD=$USERD'
     - 'export PASSWORD=$PASS'
     - 'export BRANCH=$CI_COMMIT_BRANCH'
     - 'mvn install wildfly:deploy'
@@ -37,7 +39,6 @@ deploy_prod:
     - 'echo $IP'
     - 'echo $USERD'
     - 'export IP=$IP'
-    - 'export USERD=$USERD'
     - 'export PASSWORD=$PASS'
     - 'export BRANCH=$CI_COMMIT_BRANCH'
     - 'mvn install wildfly:deploy'
