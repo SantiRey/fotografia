@@ -33,11 +33,10 @@ deploy_review:
     - 'mvn install wildfly:deploy'
   environment:
     name: review/$CI_COMMIT_BRANCH
-    url: http://$IP:9990/$CI_COMMIT_BRANCH.index.xhtml
+    url: http://$IP:9990/$CI_COMMIT_BRANCH/index.xhtml
   only:
-    - branches
-  except:
-    - master
+    - $CI_COMMIT_BRANCH
+
 
 deploy_prod:
   stage: deploy
@@ -54,7 +53,7 @@ deploy_prod:
     - 'mvn install wildfly:deploy'
   environment:
     name: production
-    url: http://$IP:9990/$CI_COMMIT_BRANCH.index.xhtml
+    url: http://$IP:9990/$CI_COMMIT_BRANCH/index.xhtml
   when: manual
   only:
     - master
