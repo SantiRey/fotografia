@@ -106,11 +106,31 @@
             <version>29.0-jre</version>
         </dependency>
 
-
+        <!-- https://mvnrepository.com/artifact/org.wildfly.plugins/wildfly-maven-plugin -->
+        <dependency>
+            <groupId>org.wildfly.plugins</groupId>
+            <artifactId>wildfly-maven-plugin</artifactId>
+            <version>2.1.0.Beta1</version>
+        </dependency>
 
     </dependencies>
+
     <build>
+        <finalName>foto</finalName>
         <plugins>
+            <!--wildfly-->
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>2.1.0.Beta1</version>
+                <configuration>
+                    <hostname>${env.IP}</hostname>
+                    <port>9990</port>
+                    <username>${env.USERD}</username>
+                    <password>${env.PASS}</password>
+                </configuration>
+            </plugin>
+
             <!--Tomcat Plugin -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
