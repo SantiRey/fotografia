@@ -8,6 +8,29 @@ cache:
   paths:
     - ./.m2/repository
 
+deploy_review:
+  stage: deploy
+  image: maven
+  script:
+    - echo "Deploy a review app"
+    - 'echo $IP'
+    - 'echo $USERD'
+    - 'echo $CI_COMMIT_BRANCH'
+    - 'export BRANCH=$CI_COMMIT_BRANCH'
+    - 'echo $BRANCH'
+    - 'export IP=$IP'
+    - 'export USERD=$USERD'
+    - 'export PASSWORD=$PASS'
+    - 'mvn install wildfly:deploy'
+  environment:
+    name: review/$CI_COMMIT_BRANCH
+    url: http://$IP:9990/$CI_COMMIT_BRANCH/index.xhtml
+  only:
+    - branches
+  except:
+    - master
+
+
 deploy_prod:
   stage: deploy
   image: maven
